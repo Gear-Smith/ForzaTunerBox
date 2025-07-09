@@ -55,6 +55,7 @@ function App() {
               <GiGearHammer className=" fill-primary inline-block text-2xl" />
             </span>
           </p>
+          <p>Copyright © 2025 GearSmith Integrations LLC</p>
         </footer>
       </section>
     </ThemeProvider>

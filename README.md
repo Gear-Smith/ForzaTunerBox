@@ -1,54 +1,63 @@
-# React + TypeScript + Vite
+# 🚗 Forza Tuner Box
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A tuning utility for **Forza Motorsport 2023** that transforms car data and driving preferences into optimized handling setups.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Table of Contents
 
-## Expanding the ESLint configuration
+- [🚗 Forza Tuner Box](#-forza-tuner-box)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [About the Project](#about-the-project)
+  - [Features](#features)
+  - [Roadmap](#roadmap)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## About the Project
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Forza Tuner Box helps Forza Motorsport players generate custom tuning configurations using real vehicle stats, driving style inputs, and track considerations. It provides:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- A sleek UI built with **React**, **Tailwind**, and **shadcn/ui**  
+- Core tuning formulas based on weight distribution, drivetrain, power-to-weight  
+- Phase-by-phase roadmap to extend features with telemetry and smart suggestions  
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+
+## Features
+
+- Input form for vehicle stats and race preferences  
+- Output tuning parameters: springs, damping, alignment, differential  
+- Clean, responsive UI with dark theme and Forza-style accents  
+- Roadmap-driven development for future advanced functionality  
+
+---
+
+## Roadmap
+
+| Phase | Status | Details |
+|-------|--------|---------|
+| Core Tuner MVP | ✅ Complete | Vehicle stats form, tuning logic, and UI layout |
+| Driving Behavior & Fine Tuning | 🔄 In Progress | Tire pressure model, ride height, save/share tunes |
+| Telemetry Integration | ⚙️ Upcoming | UDP listener, handling comparison, in-game alerts overlay |
+| Smart Recommendations | ⚙️ Upcoming | Feedback prompts, preset engine, driver tracking |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18+) or **Bun**  
+- yarn or npm  
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/forza-tuner-box.git
+cd forza-tuner-box
+bun install
 ```
