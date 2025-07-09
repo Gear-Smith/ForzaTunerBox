@@ -45,6 +45,7 @@
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.8",
     "vaul": "^1.1.2",
+    "wrangler": "^4.24.0",
     "zod": "^3.25.32"
   },
   "devDependencies": {
