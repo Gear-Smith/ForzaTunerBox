@@ -146,11 +146,9 @@ export class ForzaTune {
   }
 
   private calculateCamber(frontPercent: number): SpringRate {
-    // Front camber: Starts at -2.2 and reduces slightly as rear bias increases
     let frontCamber = -2.2 + ((50 - frontPercent) / 15);
     frontCamber = this.clamp(frontCamber, this.limits.camber.min, -1.8);
 
-    // Rear camber: always offset from front and clamped between -1.3 and -1.2
     let rearCamber = frontCamber + 0.7;
     rearCamber = this.clamp(rearCamber, -1.3, -1.2);
 
@@ -194,35 +192,16 @@ export class ForzaTune {
   private calculateAWDDiff(frontPercent: number, powerToWeight: number): Differential {
     const rearPercent = 100 - frontPercent;
 
-    const frontAccel = this.clamp(
-      35 + (frontPercent - 50) * 0.5 - (powerToWeight * 5),
-      25,
-      50
-    );
+    // Front diff: modest accel, minimal decel
+    const frontAccel = this.clamp(25 + (frontPercent - 50) * 0.2, 10, 40);
+    const frontDecel = this.clamp(5 + (frontPercent - 50) * 0.1, 0, 15);
 
-    const frontDecel = this.clamp(
-      13 + (frontPercent - 50) * 0.5,
-      8,
-      25
-    );
+    // Rear diff: strong accel, moderate decel
+    const rearAccel = this.clamp(60 + (rearPercent - 50) * 0.4 + (powerToWeight - 0.15) * 25, 50, 85);
+    const rearDecel = this.clamp(15 + (rearPercent - 50) * 0.2, 10, 35);
 
-    const rearAccel = this.clamp(
-      50 + (rearPercent - 50) * 1.2 + (powerToWeight - 0.15) * 40,
-      40,
-      70
-    );
-
-    const rearDecel = this.clamp(
-      23 + (rearPercent - 50) * 0.6 + (powerToWeight - 0.15) * 20,
-      15,
-      40
-    );
-
-    const centerBalance = this.clamp(
-      58 + (rearPercent - 50) * 2.5 + (powerToWeight - 0.15) * 40,
-      50,
-      75
-    );
+    // Center bias: 60–75% rear, based on rear bias
+    const centerBalance = this.clamp(60 + (rearPercent - 50) * 0.3, 60, 75);
 
     return {
       drivetrain: "AWD",
@@ -237,6 +216,7 @@ export class ForzaTune {
       center: Math.round(centerBalance),
     };
   }
+
 
   private calculateDifferential(
     frontPercent: number,
@@ -258,9 +238,11 @@ export class ForzaTune {
     if (drivetrain === "FWD") {
       differential.front.acceleration = Math.round(this.clamp(baseAccel - 3, 0, 100));
       differential.front.deceleration = Math.round(this.clamp(baseDecel, 0, 100));
+      differential.center = 50
     } else if (drivetrain === "RWD") {
       differential.rear.acceleration = Math.round(this.clamp(baseAccel, 0, 100));
       differential.rear.deceleration = Math.round(this.clamp(baseDecel, 0, 100));
+      differential.center = 50
     } else if (drivetrain === "AWD") {
       return this.calculateAWDDiff(frontPercent, powerToWeight);
     }
