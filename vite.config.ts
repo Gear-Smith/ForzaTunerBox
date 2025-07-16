@@ -6,6 +6,9 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  define: {
+
+  },
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,

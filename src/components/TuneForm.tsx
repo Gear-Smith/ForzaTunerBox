@@ -39,14 +39,20 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
             onValueChange={(value) => setRaceStyle(value as RaceStyle)}
             type="single"
           >
-            <ToggleGroupItem value="Technical" aria-label="Toggle Technical">
-              <span className="italic">Technical</span>
+            <ToggleGroupItem asChild value="Technical" aria-label="Toggle Technical">
+              <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+                Technical
+              </span>
             </ToggleGroupItem>
-            <ToggleGroupItem value="Balanced" aria-label="Toggle Balanced">
-              <span className="italic">Balanced</span>
+            <ToggleGroupItem asChild value="Balanced" aria-label="Toggle Balanced">
+              <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+                Balanced
+              </span>
             </ToggleGroupItem>
-            <ToggleGroupItem value="HighSpeed" aria-label="Toggle HighSpeed">
-              <span className="italic">HighSpeed</span>
+            <ToggleGroupItem asChild value="HighSpeed" aria-label="Toggle HighSpeed">
+              <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+                HighSpeed
+              </span>
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
@@ -96,14 +102,20 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
           onValueChange={(value) => setDrivetrain(value as Drivetrain)}
           type="single"
         >
-          <ToggleGroupItem value="FWD" aria-label="Toggle FWD">
-            <span className="italic">FWD</span>
+          <ToggleGroupItem asChild value="FWD" aria-label="Toggle FWD">
+            <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+              FWD
+            </span>
           </ToggleGroupItem>
-          <ToggleGroupItem value="AWD" aria-label="Toggle AWD">
-            <span className="italic">AWD</span>
+          <ToggleGroupItem asChild value="AWD" aria-label="Toggle AWD">
+            <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+              AWD
+            </span>
           </ToggleGroupItem>
-          <ToggleGroupItem value="RWD" aria-label="Toggle RWD">
-            <span className="italic">RWD</span>
+          <ToggleGroupItem asChild value="RWD" aria-label="Toggle RWD">
+            <span className="italic cursor-pointer hover:bg-primary/20 hover:text-primary">
+              RWD
+            </span>
           </ToggleGroupItem>
         </ToggleGroup>
       </div>
