@@ -21,7 +21,7 @@ export function TuneOutput({ tune }: TuneOutputProps) {
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-bold mb-4">Calculated Tune</h2>
+      <h2 className="text-2xl font-bold mb-4">Baseline Tune</h2>
       <ScrollArea className="">
         <section className="p-6 space-y-6">
           {/* Springs */}

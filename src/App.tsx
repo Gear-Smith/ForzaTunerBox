@@ -27,9 +27,9 @@ function App() {
                 <HoverCardTrigger>
                   <Button variant={"link"}>v{import.meta.env.VITE_APP_VERSION}</Button>
                   <HoverCardContent className="w-96">
-                    <div className="flex justify-between gap-4">
+                    <div className="flex items-start gap-4">
                       <Avatar>
-                        <AvatarImage src="./public/steering-wheel.svg" />
+                        <AvatarImage src="/steering-wheel.svg" />
                         <AvatarFallback>FTB</AvatarFallback>
                       </Avatar>
                       <div className="space-y-1">
