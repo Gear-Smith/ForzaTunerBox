@@ -6,7 +6,10 @@ import { Roadmap } from "./components/Roadmap";
 import { ThemeProvider } from "./components/theme-provider";
 import { TuneForm } from "./components/TuneForm";
 import { TuneOutput } from "./components/TuneOutput";
+import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
+import { Button } from "./components/ui/button";
 import { Card } from "./components/ui/card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "./components/ui/hover-card";
 import { Separator } from "./components/ui/separator";
 import { ForzaTune } from "./ForzaTune";
 
@@ -20,7 +23,38 @@ function App() {
           <Card className="relative">
             <h1 className="font-ethnocentric-italic text-primary">Forza Tuner Box</h1>
             <div className="absolute bottom-0 right-0 p-2">
-              <p className="text-primary">v{import.meta.env.VITE_APP_VERSION}</p>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <Button variant={"link"}>v{import.meta.env.VITE_APP_VERSION}</Button>
+                  <HoverCardContent className="w-96">
+                    <div className="flex justify-between gap-4">
+                      <Avatar>
+                        <AvatarImage src="./public/steering-wheel.svg" />
+                        <AvatarFallback>FTB</AvatarFallback>
+                      </Avatar>
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-semibold">Changelog</h4>
+                        <div id="latest-version" className="space-y-1">
+                          <p className="text-xs text-muted-foreground">
+                            <span className="font-semibold">
+                              v{import.meta.env.VITE_APP_VERSION}
+                            </span>
+                          </p>
+                          <p className="text-sm">
+                            - Adjusted differential output weights
+                            <br />
+                            - Fixed Center Balance UI
+                            <br />
+                            - Added form validation
+                            <br />- Camber now less aggressive
+                          </p>
+                        </div>
+                        <div className="text-muted-foreground text-xs">Updated 16 July 2025</div>
+                      </div>
+                    </div>
+                  </HoverCardContent>
+                </HoverCardTrigger>
+              </HoverCard>
             </div>
           </Card>
 

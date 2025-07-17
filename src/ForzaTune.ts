@@ -147,10 +147,10 @@ export class ForzaTune {
 
   private calculateCamber(frontPercent: number): SpringRate {
     let frontCamber = -2.2 + ((50 - frontPercent) / 15);
-    frontCamber = this.clamp(frontCamber, this.limits.camber.min, -1.8);
+    frontCamber = this.clamp(frontCamber, -1.8, 1.8);
 
     let rearCamber = frontCamber + 0.7;
-    rearCamber = this.clamp(rearCamber, -1.3, -1.2);
+    rearCamber = this.clamp(rearCamber, -1.3, 1.2);
 
     return {
       front: parseFloat(frontCamber.toFixed(1)),
