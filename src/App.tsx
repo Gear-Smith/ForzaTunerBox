@@ -17,16 +17,16 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="forzaTune-ui-theme">
       <section className="">
         <section className="flex flex-col max-w-7xl mx-auto p-4">
-          <Card>
+          <Card className="relative">
             <h1 className="font-ethnocentric-italic text-primary">Forza Tuner Box</h1>
+            <div className="absolute bottom-0 right-0 p-2">
+              <p className="text-primary">v{import.meta.env.VITE_APP_VERSION}</p>
+            </div>
           </Card>
 
           <Card className="my-4 bg-black p-0">
             <div className="grid lg:grid-cols-2">
               <div className="flex flex-col gap-4 p-6 md:p-10">
-                <div className="flex justify-left">
-                  <p className="text-primary">v{import.meta.env.VITE_APP_VERSION}</p>
-                </div>
                 <div className="flex flex-1 items-center justify-center">
                   <div className="w-full max-w-xs">
                     <TuneForm onTuneCalculated={setTune} />

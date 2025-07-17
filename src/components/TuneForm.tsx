@@ -35,8 +35,13 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
       <div className="flex flex-col items-center gap-2 text-center">
         <div className="flex flex-row justify-center">
           <ToggleGroup
+            value={raceStyle}
             defaultValue="Balanced"
-            onValueChange={(value) => setRaceStyle(value as RaceStyle)}
+            onValueChange={(value) => {
+              if (value) {
+                setRaceStyle(value as RaceStyle);
+              }
+            }}
             type="single"
           >
             <ToggleGroupItem asChild value="Technical" aria-label="Toggle Technical">
@@ -62,6 +67,7 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
         Total Weight
       </label>
       <input
+        required
         step={1}
         type="number"
         placeholder="e.g. 1500"
@@ -74,6 +80,9 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
         Power to Weight Ratio
       </label>
       <input
+        required
+        max={2}
+        min={0.001}
         step={0.001}
         type="number"
         placeholder="e.g. 0.5"
@@ -98,8 +107,14 @@ export function TuneForm({ onTuneCalculated }: TuneFormProps) {
       </div>
       <div className="flex flex-row justify-center">
         <ToggleGroup
+          value={drivetrain}
+          className="w-full"
           defaultValue="RWD"
-          onValueChange={(value) => setDrivetrain(value as Drivetrain)}
+          onValueChange={(value) => {
+            if (value) {
+              setDrivetrain(value as Drivetrain);
+            }
+          }}
           type="single"
         >
           <ToggleGroupItem asChild value="FWD" aria-label="Toggle FWD">
