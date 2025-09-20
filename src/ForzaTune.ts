@@ -1,5 +1,3 @@
-// Assume this will be in ForzaTune.ts
-
 export type Drivetrain = "FWD" | "RWD" | "AWD";
 
 export type RacePreference = "Circuit" | "Drift" | "Drag";
@@ -30,7 +28,7 @@ export interface Differential {
   drivetrain: Drivetrain;
   front: { acceleration: number; deceleration: number };
   rear: { acceleration: number; deceleration: number };
-  center: number; // Represented as rear torque bias in %
+  center: number;
 }
 
 export interface AntiRollBar {
@@ -173,10 +171,10 @@ export class ForzaTune {
   private calculateToe(preference: RaceStyle): Toe {
     switch (preference) {
       case "Technical":
-        return { front: 0.2, rear: 0.1 }; // slight toe-out for better rotation
+        return { front: 0.2, rear: 0.1 };
       case "HighSpeed":
-        return { front: -0.1, rear: -0.1 }; // slight toe-in for stability
-      default: // "Balanced"
+        return { front: -0.1, rear: -0.1 };
+      default:
         return { front: 0, rear: 0 };
     }
   }
@@ -192,15 +190,12 @@ export class ForzaTune {
   private calculateAWDDiff(frontPercent: number, powerToWeight: number): Differential {
     const rearPercent = 100 - frontPercent;
 
-    // Front diff: modest accel, minimal decel
     const frontAccel = this.clamp(25 + (frontPercent - 50) * 0.2, 10, 40);
     const frontDecel = this.clamp(5 + (frontPercent - 50) * 0.1, 0, 15);
 
-    // Rear diff: strong accel, moderate decel
     const rearAccel = this.clamp(60 + (rearPercent - 50) * 0.4 + (powerToWeight - 0.15) * 25, 50, 85);
     const rearDecel = this.clamp(15 + (rearPercent - 50) * 0.2, 10, 35);
 
-    // Center bias: 60–75% rear, based on rear bias
     const centerBalance = this.clamp(60 + (rearPercent - 50) * 0.3, 60, 75);
 
     return {
@@ -223,7 +218,6 @@ export class ForzaTune {
     drivetrain: Drivetrain,
     powerToWeight: number = 0
   ): Differential {
-    // Default everything to 0
     const differential: Differential = {
       drivetrain,
       front: { acceleration: 0, deceleration: 0 },

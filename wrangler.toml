@@ -1,0 +1,7 @@
+name = "resend-api"
+main = "src/workers/email_worker.ts"
+compatibility_date = "2025-08-07"
+
+secrets_store_secrets = [
+  { binding = "RESEND_KEY", store_id = "9079e4b877d545ccb93f307e6bc499b4", secret_name = "RS_KEY" },
+]
