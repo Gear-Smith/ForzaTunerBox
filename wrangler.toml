@@ -1,4 +1,4 @@
-name = "resend-api"
+name = "forza-tuner-box"
 main = "src/workers/email_worker.ts"
 compatibility_date = "2025-08-07"
 
