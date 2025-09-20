@@ -1,7 +1,7 @@
 import type { CheckedState } from "@radix-ui/react-checkbox";
 import { useState } from "react";
 import { toast } from "sonner";
-import { FeedbackEmail } from "./email_templates/FeedbackEmail";
+import { sendFeedbackEmail } from "../lib/emailService";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -32,27 +32,36 @@ export const Feedback = ({ tune }: FeedbackProps) => {
   const [email, setEmail] = useState("");
   const [feedbackContent, setFeedbackContent] = useState("");
   const [includeTune, setIncludeTune] = useState<CheckedState>(true);
-  const [open, setOpen] = useState(false); // <-- control AlertDialog open state
+  const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmitFeedback = (feedback: Feedback) => {
-    if (includeTune && tune) {
-      feedback.tune = tune;
-    }
+  const handleSubmitFeedback = async (feedback: Feedback) => {
+    setIsSubmitting(true);
 
-    console.log(feedback);
+    try {
+      await sendFeedbackEmail({
+        email: feedback.email,
+        content: feedback.content,
+        tune: includeTune ? tune : null,
+        recipientEmail: "feedback@forzatunerbox.com",
+      });
 
-    toast.success("Feedback submitted!", {
-      description: "Thanks for your input!",
-    });
+      toast.success("Feedback submitted!", {
+        description: "Thanks for your input! We'll get back to you soon.",
+      });
 
-    setTimeout(() => {
+      setEmail("");
+      setFeedbackContent("");
+      setIncludeTune(true);
       setOpen(false);
-    }, 100);
-
-    // Optional: reset form
-    setEmail("");
-    setFeedbackContent("");
-    setIncludeTune(true);
+    } catch (error) {
+      console.error("Failed to submit feedback:", error);
+      toast.error("Failed to submit feedback", {
+        description: error instanceof Error ? error.message : "Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,7 +87,6 @@ export const Feedback = ({ tune }: FeedbackProps) => {
             <AlertDialogTitle>User Feedback</AlertDialogTitle>
             <AlertDialogDescription asChild>
               <div className="flex flex-col gap-6">
-                {tune && <FeedbackEmail tune={tune} feedbackString={feedbackContent} />}
                 <Input
                   type="email"
                   placeholder="Email"
@@ -110,8 +118,12 @@ export const Feedback = ({ tune }: FeedbackProps) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel type="button">Cancel</AlertDialogCancel>
-            <Button type="submit" className="hover:outline-1 outline-green-400 rounded-md px-2">
-              Submit
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="hover:outline-1 outline-green-400 rounded-md px-2"
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </AlertDialogFooter>
         </form>

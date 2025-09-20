@@ -32,7 +32,7 @@ export const FeedbackEmail = ({ tune, feedbackString }: FeedbackEmailProps) => {
             <Text style={text}>{feedbackString}</Text>
 
             {tune && (
-              <CodeBlock theme={dracula} language={"html"} code={tune.toString()}></CodeBlock>
+              <CodeBlock theme={dracula} language={"json"} code={JSON.stringify(tune, null, 2)}></CodeBlock>
             )}
           </Section>
         </Container>
@@ -56,25 +56,10 @@ const header = {
   zIndex: "999",
 };
 
-const heading = {
-  background: "#f0d361",
-  padding: "30px",
-  color: "#191919",
-  fontWeight: "400",
-  marginBottom: "0",
-};
-
 const section = {
   margin: "0",
   background: "#fff",
   padding: "0 24px",
-};
-
-const yellowSection = {
-  background: "#f5d247",
-  padding: "30px",
-  fontSize: "18px",
-  lineHeight: "1.5",
 };
 
 const text = {

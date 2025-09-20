@@ -24,7 +24,6 @@ export function TuneOutput({ tune }: TuneOutputProps) {
       <h2 className="text-2xl font-bold mb-4">Baseline Tune</h2>
       <ScrollArea className="">
         <section className="p-6 space-y-6">
-          {/* Springs */}
           <section>
             <Card className="p-4 gap-1">
               <CardHeader>
@@ -49,7 +48,6 @@ export function TuneOutput({ tune }: TuneOutputProps) {
             </Card>
           </section>
 
-          {/* Damping */}
           <section className="grid grid-cols-2 gap-4">
             <Card className="p-4 gap-1">
               <CardTitle className="font-semibold">Damping Settings</CardTitle>
@@ -107,7 +105,6 @@ export function TuneOutput({ tune }: TuneOutputProps) {
 
           <Separator className="my-4" orientation="horizontal" />
 
-          {/* Alignment */}
           <section>
             <Card className="p-4 gap-1">
               <CardHeader>
@@ -159,7 +156,6 @@ export function TuneOutput({ tune }: TuneOutputProps) {
 
           <Separator className="my-4" orientation="horizontal" />
 
-          {/* Differential */}
           <section>
             <Card className="p-4 gap-1">
               <CardHeader>

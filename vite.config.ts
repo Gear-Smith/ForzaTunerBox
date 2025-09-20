@@ -18,7 +18,7 @@ export default defineConfig({
       requireAssertions: true,
     },
     setupFiles: './src/setupTests.ts',
-    include: ['**/__tests__/**/*.test.tsx'],
+    include: ['**/__tests__/**/*.test.{ts,tsx}'],
   },
   resolve: {
     alias: {

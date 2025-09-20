@@ -8,7 +8,7 @@ interface TuneStatBarProps {
   unit?: string;
   lowLabel?: string;
   highLabel?: string;
-  centeredAt?: number; // Optional midpoint to trigger ZeroCenterProgressBar
+  centeredAt?: number;
 }
 
 export const TuneStatBar: React.FC<TuneStatBarProps> = ({
@@ -76,13 +76,11 @@ const ZeroCenterProgressBar: React.FC<ZeroCenterProgressBarProps> = ({
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="relative h-2 w-full overflow-hidden rounded-full bg-primary/20">
-        {/* Center marker */}
         <div
           className="absolute h-full w-[2px] bg-foreground"
           style={{ left: `${centerOffset}%` }}
         />
 
-        {/* Left side fill */}
         {side === "left" && (
           <div
             className="absolute h-full bg-primary transition-all"
@@ -93,7 +91,6 @@ const ZeroCenterProgressBar: React.FC<ZeroCenterProgressBarProps> = ({
           />
         )}
 
-        {/* Right side fill */}
         {side === "right" && (
           <div
             className="absolute h-full bg-primary transition-all"

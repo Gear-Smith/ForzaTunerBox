@@ -1,5 +1,11 @@
+interface CloudflareEnv {
+  RESEND_KEY: {
+    get(): Promise<string>;
+  };
+}
+
 export default {
-  async fetch(request: Request, env): Promise<Response> {
+  async fetch(request: Request, env: CloudflareEnv): Promise<Response> {
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: cors() })
     }
@@ -17,7 +23,7 @@ export default {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: from ?? "notifications@your-domain.tld",
+        from: from ?? "feedback@forzatunerbox.com",
         to,
         subject,
         html,
@@ -31,7 +37,7 @@ export default {
 
 function cors() {
   return {
-    "Access-Control-Allow-Origin": "*",            // tighten this to your domain in prod
+    "Access-Control-Allow-Origin": "https://forzatunerbox.com",
     "Access-Control-Allow-Methods": "POST,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,Authorization",
   }
