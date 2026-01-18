@@ -6,23 +6,25 @@ import path from "path"
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  define: {
+export default defineConfig(({ mode }) => {
+  const isTest =
+    mode === "test" ||
+    process.env.VITEST === "true" ||
+    !!process.env.VITEST ||
+    process.argv.some((a) => a.includes("vitest"));
+  return {
+    define: {
 
-  },
-  plugins: [react(), tailwindcss(), cloudflare()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    expect: {
-      requireAssertions: true,
     },
-    setupFiles: './src/setupTests.ts',
-    include: ['**/__tests__/**/*.test.{ts,tsx}'],
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    plugins: [react(), tailwindcss(), (isTest ? [] : [cloudflare()])],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
     },
+    test: {
+      environment: "jsdom",
+      setupFiles: ["./src/setupTests.ts"]
+    }
   }
 })

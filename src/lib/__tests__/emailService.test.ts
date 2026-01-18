@@ -1,15 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from '@/setupTests';
 
-global.fetch = vi.fn();
+// global.fetch = vi.fn();
+
 
 vi.stubEnv('VITE_WORKER_URL', 'https://test-worker.dev');
 
 describe('emailService', () => {
-  let mockFetch: ReturnType<typeof vi.mocked<typeof fetch>>;
+  let mockFetch: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
-    mockFetch = vi.mocked(fetch);
-    vi.clearAllMocks();
+    mockFetch = vi.fn();
+    vi.stubGlobal("fetch", mockFetch);
   });
 
   it('should generate proper HTML email structure', async () => {
@@ -86,7 +87,7 @@ describe('emailService', () => {
 
     const callArgs = mockFetch.mock.calls[0][1] as RequestInit;
     const body = JSON.parse(callArgs.body as string);
-    
+
     expect(body.html).toContain('Included Tune Data:');
     expect(body.html).toContain(JSON.stringify(mockTune, null, 2));
   });
