@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss(), (isTest ? [] : [cloudflare()])],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "./src"),
+        "@": path.resolve(import.meta.dirname, "./src"),
       },
     },
     test: {

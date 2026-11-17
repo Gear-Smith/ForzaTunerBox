@@ -43,7 +43,6 @@ export const Feedback = ({ tune }: FeedbackProps) => {
         email: feedback.email,
         content: feedback.content,
         tune: includeTune ? tune : null,
-        recipientEmail: "feedback@forzatunerbox.com",
       });
 
       toast.success("Feedback submitted!", {

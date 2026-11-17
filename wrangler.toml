@@ -5,3 +5,26 @@ compatibility_date = "2025-08-07"
 secrets_store_secrets = [
   { binding = "RESEND_KEY", store_id = "9079e4b877d545ccb93f307e6bc499b4", secret_name = "RS_KEY" },
 ]
+
+[observability]
+enabled = false
+head_sampling_rate = 1
+redact_query_string = false
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+persist = true
+
+[observability.issues]
+enabled = false
+[[ratelimits]]
+name = "FEEDBACK_LIMITER"
+namespace_id = "674215"
+simple = { limit = 5, period = 60 }

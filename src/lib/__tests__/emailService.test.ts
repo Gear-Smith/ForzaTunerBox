@@ -13,10 +13,9 @@ describe('emailService', () => {
     vi.stubGlobal("fetch", mockFetch);
   });
 
-  it('should generate proper HTML email structure', async () => {
+  it('posts only feedback fields', async () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ id: 'test-email-id' })
     } as Response);
 
     const { sendFeedbackEmail } = await import('../emailService');
@@ -24,22 +23,20 @@ describe('emailService', () => {
     await sendFeedbackEmail({
       email: 'test@example.com',
       content: 'Test feedback content',
-      recipientEmail: 'recipient@example.com'
     });
 
-    expect(fetch).toHaveBeenCalledWith('https://test-worker.dev', {
+    expect(fetch).toHaveBeenCalledWith('https://test-worker.dev/api/feedback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: expect.stringContaining('"subject":"ForzaTunerBox Feedback from test@example.com"')
+      body: JSON.stringify({ email: 'test@example.com', content: 'Test feedback content' })
     });
   });
 
   it('should include tune data when provided', async () => {
     mockFetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ id: 'test-email-id' })
     } as Response);
 
     const { sendFeedbackEmail } = await import('../emailService');
@@ -82,13 +79,11 @@ describe('emailService', () => {
     await sendFeedbackEmail({
       content: 'Test with tune',
       tune: mockTune,
-      recipientEmail: 'recipient@example.com'
     });
 
     const callArgs = mockFetch.mock.calls[0][1] as RequestInit;
     const body = JSON.parse(callArgs.body as string);
 
-    expect(body.html).toContain('Included Tune Data:');
-    expect(body.html).toContain(JSON.stringify(mockTune, null, 2));
+    expect(body.tune).toEqual(mockTune);
   });
 });
