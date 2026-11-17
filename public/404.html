@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Page not found | Forza Tuner Box</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, sans-serif;
+        background: #111;
+        color: #fafafa;
+        --accent: oklch(0.85 0.18 80);
+      }
+      body {
+        box-sizing: border-box;
+        min-height: 100vh;
+        min-height: 100svh;
+        margin: 0;
+        padding: 1rem;
+        display: grid;
+        place-items: center;
+      }
+      main {
+        box-sizing: border-box;
+        width: min(100%, 34rem);
+        padding: clamp(1.5rem, 6vw, 3.5rem);
+        border: 1px solid #343434;
+        border-top: 3px solid var(--accent);
+        border-radius: .625rem;
+        background: #191919;
+        text-align: center;
+      }
+      .brand {
+        margin: 0;
+        color: var(--accent);
+        font-size: .9rem;
+        font-weight: 800;
+        font-style: italic;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: .75rem 0;
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.1;
+        text-wrap: balance;
+      }
+      .description { margin: 0; color: #c6c6c6; line-height: 1.5; }
+      a {
+        display: inline-block;
+        margin-top: 1.75rem;
+        padding: .75rem 1rem;
+        border-radius: .5rem;
+        background: var(--accent);
+        color: #171717;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      a:hover { background: #ffd775; }
+      a:focus-visible { outline: 2px solid #fafafa; outline-offset: 4px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="brand">Forza Tuner Box</p>
+      <h1>404 · Page not found</h1>
+      <p class="description">This page may have moved, or the address may be incorrect.</p>
+      <a href="/">Back to the tuner</a>
+    </main>
+  </body>
+</html>
